@@ -26,12 +26,14 @@ public class ProdutosDAO {
     public int cadastrarProduto (ProdutosDTO produto){
         
         int status;
+        
         try{
-            st = conn.prepareStatement("insert into filmes (nome, lancamento, categoria) values(?,?,?)");
+            st = conn.prepareStatement("insert into filmes (nome, valor, status) values(?,?,?)");
             st.setString(1,produto.getNome());
-            st.setString(2,produto.getData());
-            st.setString(3, produto.getCategoria());
+            st.setInt(2,produto.getValor());
+            st.setString(3, produto.getStatus());
             status = st.executeUpdate();
+            listagem.add(produto);
             return status;
         }catch(SQLException ex){
             return ex.getErrorCode();
